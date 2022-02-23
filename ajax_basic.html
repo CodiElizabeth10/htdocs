@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Basic AJAX Demo</title>
+		<link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="main">
+			<h2>Get The Latest Content:</h2>
+			<div class='content' id="content">
+				<input type="button" class="button" value="Get Content" id="btn_content" onclick="getContent();"/>
+			</div>
+        <p id="statechange"></p>
+
+		<script type="text/javascript">
+			// STEP 1: Setup the xml http request object
+             var ajax = new XMLHttpRequest();
+
+            // STEP 2: Prepare the open Ajax request
+             ajax.open('GET', 'content.html');
+
+
+            // STEP 3: define the ajax response callback method
+            ajax.onreadystatechange = function() {
+                if (ajax.readyState = 4) {
+                    document.getElementById('content').innerHTML = ajax.response.Text;
+                }
+            }
+
+            // STEP 4: send the ajax request for data
+            function getContent() {
+                ajax.send();
+                document.getELementById('btn_content').style.display = 'none';
+            }
+            
+
+    //one ready state change example
+
+ const xhttp = new XMLHttpRequest();
+xhttp.onload = function() {
+const xmlDoc = this.responseXML;
+const x = xmlDoc.getElementsByTagName("ARTIST");
+  let txt = "";
+  for (let i = 0; i < x.length; i++) {
+    txt = txt + x[i].childNodes[0].nodeValue + "<br>";
+  }
+  document.getElementById("statechange").innerHTML = txt;
+}
+xhttp.open("GET", "cd_catalog.xml");
+xhttp.send();
+
+
+
+		</script>
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+</html>
